@@ -69,7 +69,6 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
         String selectQry = "Select * from time_entries";
 
         listEntry = jdbcTemplate.query(selectQry,new TimeEntryRowMapper());
-
         return listEntry;
     }
 
