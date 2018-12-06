@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/time-entries")
 public class TimeEntryController {
 
     TimeEntryRepository timeEntryRepository;
@@ -15,13 +16,13 @@ public class TimeEntryController {
         this.timeEntryRepository=timeEntryRepository;
     }
 
-    @RequestMapping(value = "/time-entries",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody TimeEntry timeEntryToCreate) {
 
         return new ResponseEntity(timeEntryRepository.create(timeEntryToCreate),HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/time-entries/{timeEntryId}",method = RequestMethod.GET)
+    @RequestMapping(value = "{timeEntryId}",method = RequestMethod.GET)
     public ResponseEntity<TimeEntry> read(@PathVariable long timeEntryId) {
 
         TimeEntry result = timeEntryRepository.find(timeEntryId);
@@ -32,13 +33,13 @@ public class TimeEntryController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/time-entries",method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<TimeEntry>> list() {
 
         return new ResponseEntity<>(timeEntryRepository.list(),HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/time-entries/{timeEntryId}",method = RequestMethod.PUT)
+    @RequestMapping(value = "{timeEntryId}",method = RequestMethod.PUT)
     public ResponseEntity update(@PathVariable long timeEntryId, @RequestBody TimeEntry expected) {
 
         TimeEntry testVal = timeEntryRepository.update(timeEntryId,expected);
@@ -50,7 +51,7 @@ public class TimeEntryController {
 
     }
 
-    @RequestMapping(value = "/time-entries/{timeEntryId}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "{timeEntryId}",method = RequestMethod.DELETE)
     public ResponseEntity<TimeEntry> delete(@PathVariable long timeEntryId) {
         System.out.println(timeEntryId);
         timeEntryRepository.delete(timeEntryId);
