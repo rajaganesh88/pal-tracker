@@ -59,7 +59,6 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
         catch (EmptyResultDataAccessException e){
             timeEntry =null;
         }
-
         return timeEntry;
     }
 
