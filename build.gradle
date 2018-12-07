@@ -33,7 +33,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
 
     compile("mysql:mysql-connector-java:8.0.11")
-
+    compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
     testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
 
 }
@@ -48,6 +48,7 @@ bootRun.environment([
         "SPRING_DATASOURCE_URL": developmentDbUrl,
         "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
         "MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS": "always",
+        "HTTPS_DISABLED": true,
 ])
 
 def testDbUrl ="jdbc:mysql://localhost:3306/tracker_test?user=tracker&useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false"
@@ -56,6 +57,7 @@ test.environment([
         "SPRING_DATASOURCE_URL": testDbUrl,
         "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
         "MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS": "always",
+        "HTTPS_DISABLED": true,
 ])
 
 flyway {
